@@ -2,41 +2,62 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+/* DexTruth Design System - Futuristic Blockchain Aesthetic
 All colors MUST be HSL.
 */
 
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap');
+
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* DexTruth Color Palette */
+    --background: 224 65% 8%; /* Deep navy blue #0A0E27 */
+    --foreground: 0 0% 100%; /* White text */
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 224 65% 12%; /* Slightly lighter navy for cards */
+    --card-foreground: 0 0% 100%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 224 65% 12%;
+    --popover-foreground: 0 0% 100%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 243 89% 70%; /* Electric purple #6C63FF */
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 224 65% 15%; /* Darker navy for secondary elements */
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 224 65% 15%;
+    --muted-foreground: 0 0% 71%; /* Light gray #B5B5B5 */
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 187 100% 59%; /* Neon turquoise #2CE3FF */
+    --accent-foreground: 224 65% 8%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 224 65% 20%;
+    --input: 224 65% 15%;
+    --ring: 187 100% 59%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
+
+    /* DexTruth Custom Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(224 65% 8%), hsl(243 89% 70%));
+    --gradient-card: linear-gradient(135deg, hsl(224 65% 12% / 0.8), hsl(243 89% 70% / 0.1));
+    --gradient-accent: linear-gradient(135deg, hsl(187 100% 59%), hsl(243 89% 70%));
+    
+    /* Glassmorphism Effects */
+    --glass-bg: hsl(224 65% 12% / 0.8);
+    --glass-border: hsl(0 0% 100% / 0.1);
+    
+    /* Glow Effects */
+    --glow-primary: 0 0 20px hsl(243 89% 70% / 0.3);
+    --glow-accent: 0 0 20px hsl(187 100% 59% / 0.3);
+    --glow-card: 0 0 40px hsl(243 89% 70% / 0.1);
+
+    /* Animation Transitions */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
     --sidebar-background: 0 0% 98%;
 
@@ -100,6 +121,168 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-inter overflow-x-hidden;
+    background: var(--gradient-hero);
+    background-attachment: fixed;
   }
+}
+
+@layer components {
+  /* Hero Section Styles */
+  .hero-gradient {
+    background: var(--gradient-hero);
+  }
+
+  /* Glass Card Effect */
+  .glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glow-card);
+  }
+
+  /* Glow Button Effects */
+  .btn-glow {
+    transition: var(--transition-smooth);
+    box-shadow: var(--glow-accent);
+  }
+
+  .btn-glow:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--glow-accent), 0 10px 25px hsl(187 100% 59% / 0.2);
+  }
+
+  /* Animated Background Particles */
+  .particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .particle {
+    position: absolute;
+    background: hsl(187 100% 59% / 0.3);
+    border-radius: 50%;
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .particle:nth-child(1) { top: 20%; left: 20%; width: 4px; height: 4px; animation-delay: 0s; }
+  .particle:nth-child(2) { top: 60%; left: 80%; width: 6px; height: 6px; animation-delay: 2s; }
+  .particle:nth-child(3) { top: 80%; left: 40%; width: 3px; height: 3px; animation-delay: 4s; }
+  .particle:nth-child(4) { top: 30%; left: 70%; width: 5px; height: 5px; animation-delay: 1s; }
+  .particle:nth-child(5) { top: 70%; left: 10%; width: 4px; height: 4px; animation-delay: 3s; }
+
+  /* Feature Card Hover Effects */
+  .feature-card {
+    transition: var(--transition-smooth);
+    transform: perspective(1000px) rotateX(0deg);
+  }
+
+  .feature-card:hover {
+    transform: perspective(1000px) rotateX(5deg) translateY(-10px);
+    box-shadow: var(--glow-primary), 0 20px 40px hsl(224 65% 8% / 0.3);
+  }
+
+  /* Blockchain Network Animation */
+  .network-line {
+    stroke: hsl(187 100% 59% / 0.4);
+    stroke-width: 1;
+    animation: pulse-line 3s ease-in-out infinite;
+  }
+
+  .network-node {
+    fill: hsl(243 89% 70%);
+    animation: pulse-node 2s ease-in-out infinite;
+  }
+}
+
+@layer utilities {
+  /* Typography */
+  .font-poppins {
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .font-inter {
+    font-family: 'Inter', sans-serif;
+  }
+
+  /* Text Gradients */
+  .text-gradient {
+    background: var(--gradient-accent);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Animations */
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+}
+
+/* Keyframe Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); opacity: 0.7; }
+  50% { transform: translateY(-20px); opacity: 1; }
+}
+
+@keyframes glow {
+  from { box-shadow: var(--glow-accent); }
+  to { box-shadow: var(--glow-accent), 0 0 30px hsl(187 100% 59% / 0.4); }
+}
+
+@keyframes pulse-line {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+@keyframes pulse-node {
+  0%, 100% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.2); opacity: 1; }
+}
+
+/* Text Utilities */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(224 65% 8%);
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(243 89% 70%);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(187 100% 59%);
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
 }
